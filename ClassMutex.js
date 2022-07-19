@@ -7,7 +7,7 @@ class Mutex {
     var LockStack               = [_Lock];
     
     var _DEBUGTRACE             = true;
-    NameThisObject              = function (ThisObject, ThisName){
+    var NameThisObject          = function (ThisObject, ThisName){
       Object.defineProperty(ThisObject, 'name', {
         value: ThisName,
         configurable: true,
@@ -121,6 +121,10 @@ class Mutex {
 }
 
 // /*
+const WaitDelay = ThisDelay => new Promise(resolve => {
+  setTimeout(resolve, ThisDelay);
+});
+
 const TheMutex              = new Mutex();
 async function Executor (ThisName, ThisLock){
   console.log(ThisName + " Running...", (ThisLock), ThisLock.name, "is", ThisLock.State, "IsLocked:", this.IsLocked());
